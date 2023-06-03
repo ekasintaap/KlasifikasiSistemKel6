@@ -34,61 +34,6 @@ $(document).ready(function(){
     var file_data = $('#input_gambar').prop('files')[0];   
     var pics_data = new FormData();                  
     pics_data.append('file', file_data);
-	// Fungsi untuk mengambil gambar dari kamera
-function ambilGambar() {
-	var input = document.getElementById("ambil_gambar");
-	var previewImage = document.getElementById("preview_image");
-  
-	// Mengecek apakah browser mendukung fitur kamera
-	if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-	  // Memanggil mediaDevices.getUserMedia untuk mengakses kamera
-	  navigator.mediaDevices.getUserMedia({ video: true })
-		.then(function(stream) {
-		  // Menampilkan elemen gambar yang sebelumnya tersembunyi
-		  previewImage.style.display = "block";
-  
-		  // Mendapatkan objek gambar dari elemen input
-		  var img = document.createElement("img");
-  
-		  // Membaca gambar dari stream kamera dan menampilkannya pada elemen img
-		  img.srcObject = stream;
-  
-		  // Mengubah objek gambar menjadi data URL
-		  var url = URL.createObjectURL(stream);
-  
-		  // Mengatur data URL sebagai nilai sumber gambar
-		  img.src = url;
-  
-		  // Memperbarui tampilan gambar
-		  previewImage.src = url;
-  
-		  // Menghentikan stream kamera saat gambar diambil
-		  input.addEventListener("change", function(event) {
-			stream.getTracks().forEach(function(track) {
-			  track.stop();
-			});
-  
-			// Menghapus event listener agar tidak terus mendengar perubahan input
-			input.removeEventListener("change", arguments.callee);
-		  });
-		})
-		.catch(function(error) {
-		  console.error("Kamera tidak tersedia:", error);
-		});
-	} else {
-	  console.error("Browser tidak mendukung fitur kamera");
-	}
-}
-	
-
-// function ambilGambar() {
-	
-//   }
-
-  
-  // Menambahkan event listener untuk memanggil fungsi ambilGambar saat tombol di klik
-  document.getElementById("ambil_gambar").addEventListener("change", ambilGambar);
-  
 
 	// Panggil API dengan timeout 1 detik (1000 ms)
     setTimeout(function() {
